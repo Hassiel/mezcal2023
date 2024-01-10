@@ -1,0 +1,228 @@
+main::[]->[Int]:{
+
+	Opc::Int;
+
+	show: "\nimplementacion del compildor Mezcal";
+	show: "\nMENÚ\n";
+	show: "\n1.Impresion de asteriscos\n";
+	show: "\n2.Mayor y menor de 5 numeros\n";
+	show: "\n3.Imprecion ordenada de 10 numeros\n";
+	show: "\n4.Media, mediana y moda de 10 numeros\n";
+	show: "\n5.Salir\n";
+	show: "Ingresa el numero del programa: ";
+	load:Opc;
+	[$Opc != 5]@
+	{
+	[$Opc = 1]?
+	{
+
+		numero::Int;
+
+	show: "Dame un numero entero: ";
+	load:numero;
+	show: "\n";
+
+	[ i:$numero \ $i>0 \ i:$i - 1 ]@
+	{
+		[ j:0 \ $j<$i \ j:$j + 1]@
+		{
+			simp: "*";
+			}
+	show: "\n";
+			}
+
+
+	}
+	[$Opc = 2]|?
+	{
+		X, n, mayor:Int;
+		menor::Int;
+
+		X:1;
+		mayor:0;
+		menor:0;
+
+		[$X <= 5]@
+	{
+	show: "\nDame el Número";
+	load: n;
+
+	[$X = 1]?
+	{
+	mayor:$n;
+	menor:$n;
+	}
+	[$n > $mayor]|?
+	{
+		mayor:$n;
+
+	}
+		[$n < $menor]|?
+	{
+
+		menor:$n;
+	}
+		X +: 1;
+	}
+
+	show: "\nEl número mayor es: ", $mayor;
+	show: "\nEl núero menor es: ", $menor;
+	show: "";
+
+	}
+	[$Opc = 3]|?
+	{
+
+	menor::Int;
+	numero::Int;
+	temporal::Int;
+
+	Array:Int[10];
+
+	show: "Ingresa 10 Números\n";
+
+	[ i:0 \ $i<=9 \ i:$i + 1 ]@
+	{
+
+	show: "Dame el Número";
+	load: numero;
+	Array:[$i,$numero];
+			}
+	show: " ";
+		[ j:0 \ $j<=9 \ j:$j + 1 ]@
+		{
+		n::Int;
+		n: $j + 1;
+
+			[ t:0 \ $t<=8 \ t:$t + 1 ]@
+		{
+			[$Array[$t] < $Array[$n]]?
+		{
+			temporal: $Array[ $n ];
+			Array[$n]:$Array[$t];
+			Array[$t]:$temporal;
+			}
+		}
+	}
+	show: " ";
+	show: "Array Ordenado de Menor a Mayor";
+	show: " ";
+	[ t:9 \ $t>=0 \ t:$t - 1 ]@
+	{
+
+	show: $Array, $t;
+		}
+	}
+	[$Opc = 4]|?
+	{
+	Array:Int[10];
+	Aux:Int[10];
+	Cont::Int;
+	Posicion::Int;
+	Numero::Int;
+	Cont2::Int;
+	posMayor::Int;
+	Num::Int;
+	NumMayor::Int;
+	O::Int;
+	O:0;
+	Band::Int;
+	temporal::Int;
+	Band: 0;
+	n::Int;
+	suma::Int;
+	media::Dec;
+	media:0;
+	suma:0;
+	Numero:0;
+                        
+	show: "\nDame 10 Números\n";
+			
+		[ i:0 \ $i<10 \ i:$i + 1 ]@
+		{
+			show: "Dame Número:";
+			load: Num;
+			Array:[$i,$Num];
+			}
+
+		[ Cont:0 \ $Cont<=9 \ Cont:$Cont + 1 ]@
+		{
+			Aux[$Cont]:0;
+		}
+
+		[ Cont:0 \ $Cont<10 \ Cont:$Cont + 1 ]@
+		{
+		Numero:$Array[ $Cont ];
+		Posicion:$Cont;
+		[ Cont2:$Cont \ $Cont2<=9 \ Cont2:$Cont2 + 1 ]@
+		{
+		[$Array[$Cont2]=$Numero]?
+		{
+		Aux[ $Posicion ]+: 1;
+		}
+
+		}
+		}
+
+		NumMayor: $Aux[ $O ];
+		posMayor:0;
+		[ Cont:0 \ $Cont<=9 \ Cont:$Cont + 1 ]@
+		{
+			[$Aux[ $Cont ] > $NumMayor]?
+		{
+		posMayor:$Cont;
+		NumMayor:$Aux[$Cont];
+		}
+	}
+	show: "\nLa MODA es : ";
+	show: $Array , $posMayor;
+	show: "\n";
+
+				[ j:0 \ $j<=9 \ j:$j + 1 ]@
+	{
+				n::Int;
+				n: $j + 1;
+
+				[ t:0 \ $t<=8 \ t:$t + 1 ]@
+			{
+				[$Array[$t] < $Array[$n]]?
+			{
+				temporal: $Array[ $n ];
+				Array[$n]:$Array[$t];
+				Array[$t]:$temporal;
+			}
+		}
+	}
+	show: "Array Ordenado de Menor a Mayor";
+	[ t:9 \ $t>=0 \ t:$t - 1 ]@
+	{
+	show: $Array, $t;
+	}
+	show: "\nLa MEDIANA es: ";
+	show: $Array,5;
+	show: "y";
+	show: $Array,4;
+	show: "\n";
+
+	[ Cont:0 \ $Cont<=9 \ Cont:$Cont + 1 ]@
+	{
+	suma +: $Array[$Cont];
+	}
+	media: $suma / 10.0;
+	show: "La MEDIA es: ",$media;
+	}
+	|
+	{
+	show: "\nError\n";
+	}
+
+	show: "\nMENÚ\n";
+	show: "\n1. impresion de asteriscos\n";
+	show: "\n2. mayor y menor de 5 numeros\n";
+	show: "\n3. Imprecion ordenada de 10 numeros\n";
+	show: "\n4. media, mediana y moda de 10 numeros\n";
+	show: "\n5. Salir\n";
+	show: "Ingresa el numero del programa: ";
+	load:Opc;	}
+	answer:0;
+}
